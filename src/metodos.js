@@ -1,4 +1,7 @@
 import fs from "fs"; 
+import __dirname from "./utils.js"
+
+const direccion = (name) => `${__dirname}/json/${name}.json`
 
 class Contenedor {
     constructor(nombreArchivo) {
@@ -9,8 +12,8 @@ class Contenedor {
 
         let datosArchivo = []
 
-        if (fs.existsSync(`${this.nombre}.json`)){
-            datosArchivo = await fs.promises.readFile(`${this.nombre}.json`, "utf-8") 
+        if (fs.existsSync(direccion(this.nombre))){
+            datosArchivo = await fs.promises.readFile(direccion(this.nombre), "utf-8") 
             datosArchivo = JSON.parse(datosArchivo)
         } 
         
@@ -35,7 +38,7 @@ class Contenedor {
 
         datosArchivo = JSON.stringify(datosArchivo, null, "\t") 
 
-        await fs.promises.writeFile(`${this.nombre}.json`, datosArchivo) 
+        await fs.promises.writeFile(direccion(this.nombre), datosArchivo) 
 
         return addId 
     }
@@ -51,17 +54,26 @@ class Contenedor {
 
         datosArchivo = datosArchivo.filter(objeto => objeto.id !== id)
         datosArchivo = JSON.stringify(datosArchivo, null, "\t")
-        await fs.promises.writeFile(`${this.nombre}.json`, datosArchivo) 
+        await fs.promises.writeFile(direccion(this.nombre), datosArchivo) 
     }
 
     async deleteAll() {
-        if (fs.existsSync(`${this.nombre}.json`)) { 
-            await fs.promises.writeFile(`${this.nombre}.json`, "[]")
+        if (fs.existsSync(direccion(this.nombre))) { 
+            await fs.promises.writeFile(direccion(this.nombre), "[]")
         } 
     }
+
+    async update(objetoAct, id) {
+        let datosArchivo = await this.getAll()
+
+        const indiceObjeto = datosArchivo.findIndex(objeto => objeto.id == id)
+
+        objetoAct.id = id 
+        datosArchivo[indiceObjeto] = objetoAct
+        datosArchivo = JSON.stringify(datosArchivo, null, "\t")
+        await fs.promises.writeFile(direccion(this.nombre), datosArchivo)
+    }
 }
-
-
 
 
 export default Contenedor

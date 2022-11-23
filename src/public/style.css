@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#productosForm {
+    margin: 1rem;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 500px;
+    height: 200px;
+    border: 4px solid rgb(114, 216, 218);
+    border-radius: 3px;
+}
+
+.divCheckbox {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#actualizar, #eliminar {
+    width: 100px;
+}
+
+
