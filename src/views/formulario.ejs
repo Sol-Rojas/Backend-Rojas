@@ -1,0 +1,22 @@
+<%- include("./partials/head") %>
+
+<main>
+    <form action="/productos" method="post" enctype="multipart/form-data"> 
+        <Label>Titulo
+            <input type="text" name="title">
+        </Label>
+
+        <Label>Precio
+            <input type="number" name="price">
+        </Label>
+
+        <Label>Imagen
+            <input type="file" name="image">
+        </Label>
+
+        <button class="visualizar">Enviar producto</button>
+    </form>
+
+    <a class="visualizar" href="/productos">Ver los productos cargados</a>
+
+</main>

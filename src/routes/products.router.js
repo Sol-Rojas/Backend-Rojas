@@ -50,13 +50,12 @@ router.put("/:idProducto", uploader.single("image"), async (req, res) => {
     if (datosArchivo.some(objeto => objeto.id == idProducto)) { 
         if (req.file) { 
             producto.image = `${req.protocol}://${req.hostname}:8080/images/${req.file.filename}`
-            const objetoActualizado = {
+            const objetoAct = {
                 title: producto.title,
                 price: producto.price,
                 image: producto.image,
-                id: parseInt(idProducto)
             }
-            await metodo.update(objetoActualizado, idProducto)
+            await metodo.update(objetoAct, idProducto)
             res.send({ status: "sucess", message: `Producto con id ${idProducto} actualizado`})
         
         } else if (producto.image) { 

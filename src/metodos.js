@@ -19,8 +19,10 @@ class Contenedor {
         
         return datosArchivo
     }
-       
+        
     async save(objeto) { 
+      
+        objeto.price = objeto.price == undefined ? undefined : parseFloat(objeto.price)
 
         let datosArchivo = await this.getAll()
 
